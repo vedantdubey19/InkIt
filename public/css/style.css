@@ -1,0 +1,192 @@
+:root {
+    --bg-color: #dae0e6;
+    --card-bg: #ffffff;
+    --text-color: #1a1a1b;
+    --text-muted: #6c757d;
+    --border-color: #ccc;
+    --navbar-bg: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    --card-hover-border: #2575fc;
+    --link-color: #2575fc;
+    --accent-color: #ff4081;
+}
+
+[data-theme="dark"] {
+    --bg-color: #0b0e11;
+    --card-bg: #151a21;
+    --text-color: #e3e6e8;
+    --text-muted: #94a3b8;
+    --border-color: #2d3748;
+    --navbar-bg: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    --card-hover-border: #4a5568;
+    --input-bg: #1a202c;
+    --input-text: #e2e8f0;
+    --link-color: #63b3ed;
+    --post-bg: #151a21;
+    --vote-section-bg: #1a202c;
+    --accent-color: #f687b3;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--navbar-bg) !important;
+}
+
+.card {
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.bg-light {
+    background-color: var(--vote-section-bg) !important;
+}
+
+.border-end {
+    border-color: var(--border-color) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.post-card:hover {
+    border-color: var(--card-hover-border);
+}
+
+.form-control, .form-select {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--border-color);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+}
+
+a {
+    color: var(--link-color);
+}
+
+.bg-white {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+}
+
+.post-card {
+    transition: transform 0.1s ease-in-out;
+}
+
+.post-card:hover {
+    border-color: #888;
+}
+
+.btn-primary {
+    background-color: #0079d3;
+    border-color: #0079d3;
+}
+
+.btn-primary:hover {
+    background-color: #1484d6;
+    border-color: #1484d6;
+}
+
+.text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    line-clamp: 3;
+    overflow: hidden;
+}
+
+.text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    line-clamp: 2;
+    overflow: hidden;
+}
+
+.badge {
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+}
+
+.alert {
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+footer {
+    background: transparent;
+}
+
+.img-fluid.rounded {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Custom scrollbar for better aesthetics */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+
+/* Category-specific colors */
+.badge-tech { background-color: #8e44ad !important; color: white !important; }
+.badge-news { background-color: #e74c3c !important; color: white !important; }
+.badge-gaming { background-color: #2ecc71 !important; color: white !important; }
+.badge-random { background-color: #e67e22 !important; color: white !important; }
+.badge-general { background-color: #3498db !important; color: white !important; }
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-title a:hover {
+    color: var(--link-color) !important;
+}
+
+.vote-section {
+    background-color: var(--vote-section-bg);
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+    border: none;
+    color: #333 !important;
+    font-weight: 600;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(45deg, #fad0c4 0%, #ff9a9e 99%, #ff9a9e 100%);
+}
+

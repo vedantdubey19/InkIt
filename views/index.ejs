@@ -1,0 +1,107 @@
+<%- include('partials/header') %>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h2"><%= tag ? `Tag: ${tag}` : (search ? `Search results for "${search}"` : 'Home Feed') %></h1>
+            <% if (tag || search) { %>
+                <a href="/posts" class="btn btn-outline-secondary btn-sm">Clear Filters</a>
+            <% } %>
+        </div>
+
+        <% if (posts.length === 0) { %>
+            <div class="text-center py-5">
+                <p class="text-muted h4">No posts found.</p>
+                <a href="/posts/create" class="btn btn-primary mt-3">Be the first to post!</a>
+            </div>
+        <% } %>
+
+        <% posts.forEach(post => { %>
+            <div class="card mb-3 shadow-sm post-card">
+                <div class="row g-0">
+                    <div class="col-md-1 d-flex flex-column align-items-center bg-light border-end py-3">
+                        <form action="/posts/<%= post._id %>/vote" method="POST">
+                            <input type="hidden" name="type" value="up">
+                            <button type="submit" class="btn btn-sm <%= post.upvotes.includes(currentUser && currentUser._id) ? 'btn-primary' : 'btn-outline-secondary' %> mb-1">↑</button>
+                        </form>
+                        <span class="fw-bold"><%= post.upvotes.length - post.downvotes.length %></span>
+                        <form action="/posts/<%= post._id %>/vote" method="POST">
+                            <input type="hidden" name="type" value="down">
+                            <button type="submit" class="btn btn-sm <%= post.downvotes.includes(currentUser && currentUser._id) ? 'btn-danger' : 'btn-outline-secondary' %> mt-1">↓</button>
+                        </form>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="badge badge-<%= post.tag %> text-dark me-2"><%= post.tag %></span>
+                                <small class="text-muted">Posted by <a href="/users/<%= post.author.username %>" class="text-decoration-none">u/<%= post.author.username %></a> • <%= post.createdAt.toDateString() %></small>
+                            </div>
+                            <h5 class="card-title"><a href="/posts/<%= post._id %>" class="text-decoration-none text-dark fw-bold"><%= post.title %></a></h5>
+                            <p class="card-text text-truncate-3"><%= post.body %></p>
+                            <% if (post.image) { %>
+                                <div class="mb-3">
+                                    <img src="<%= post.image %>" class="img-fluid rounded" style="max-height: 300px; object-fit: cover;" alt="<%= post.title %>">
+                                </div>
+                            <% } %>
+                            <div class="d-flex align-items-center">
+                                <a href="/posts/<%= post._id %>" class="btn btn-light btn-sm me-3 border">
+                                    💬 <%= post.comments.length %> Comments
+                                </a>
+                                <% if (currentUser && post.author._id.equals(currentUser._id)) { %>
+                                    <a href="/posts/<%= post._id %>/edit" class="btn btn-outline-secondary btn-sm me-2">Edit</a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+
+        <% if (totalPages > 1) { %>
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                        <a class="page-link" href="/posts?page=<%= currentPage - 1 %><%= search ? `&search=${search}` : '' %><%= tag ? `&tag=${tag}` : '' %>">Previous</a>
+                    </li>
+                    <% for(let i = 1; i <= totalPages; i++) { %>
+                        <li class="page-item <%= currentPage === i ? 'active' : '' %>">
+                            <a class="page-link" href="/posts?page=<%= i %><%= search ? `&search=${search}` : '' %><%= tag ? `&tag=${tag}` : '' %>"><%= i %></a>
+                        </li>
+                    <% } %>
+                    <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                        <a class="page-link" href="/posts?page=<%= currentPage + 1 %><%= search ? `&search=${search}` : '' %><%= tag ? `&tag=${tag}` : '' %>">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        <% } %>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white fw-bold">Popular Categories</div>
+            <div class="card-body">
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="/posts?tag=tech" class="badge badge-tech text-decoration-none p-2 px-3">tech</a>
+                    <a href="/posts?tag=news" class="badge badge-news text-decoration-none p-2 px-3">news</a>
+                    <a href="/posts?tag=random" class="badge badge-random text-decoration-none p-2 px-3">random</a>
+                    <a href="/posts?tag=general" class="badge badge-general text-decoration-none p-2 px-3">general</a>
+                    <a href="/posts?tag=gaming" class="badge badge-gaming text-decoration-none p-2 px-3">gaming</a>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow-sm">
+            <div class="card-body text-center py-4">
+                <h5 class="fw-bold">New to InkIt?</h5>
+                <p class="text-muted small">Post your thoughts and join the conversation!</p>
+                <% if (!currentUser) { %>
+                    <a href="/auth/register" class="btn btn-warning w-100 mb-2">Join InkIt</a>
+                    <a href="/auth/login" class="btn btn-outline-primary w-100">Login</a>
+                <% } else { %>
+                    <a href="/posts/create" class="btn btn-primary w-100">Create Post</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

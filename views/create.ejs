@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow mb-4">
+            <div class="card-body p-4">
+                <h2 class="mb-4 text-center">Create a Post</h2>
+                <form action="/posts" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label fw-bold">Title</label>
+                        <input type="text" class="form-control form-control-lg" id="title" name="title" placeholder="An interesting title..." required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tag" class="form-label fw-bold">Category / Tag</label>
+                        <select class="form-select" id="tag" name="tag">
+                            <option value="general" selected>General</option>
+                            <option value="tech">Tech</option>
+                            <option value="news">News</option>
+                            <option value="random">Random</option>
+                            <option value="gaming">Gaming</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="body" class="form-label fw-bold">Body</label>
+                        <textarea class="form-control" id="body" name="body" rows="8" placeholder="What's on your mind?" required></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="image" class="form-label fw-bold">Upload Thumbnail (Optional)</label>
+                        <input class="form-control" type="file" id="image" name="image">
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/posts" class="btn btn-light border px-4">Cancel</a>
+                        <button type="submit" class="btn btn-primary px-5">Submit Post</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

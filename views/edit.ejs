@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow mb-4">
+            <div class="card-body p-4">
+                <h2 class="mb-4 text-center">Edit Post</h2>
+                <form action="/posts/<%= post._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="title" class="form-label fw-bold">Title</label>
+                        <input type="text" class="form-control form-control-lg" id="title" name="title" value="<%= post.title %>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tag" class="form-label fw-bold">Category / Tag</label>
+                        <select class="form-select" id="tag" name="tag">
+                            <option value="general" <%= post.tag === 'general' ? 'selected' : '' %>>General</option>
+                            <option value="tech" <%= post.tag === 'tech' ? 'selected' : '' %>>Tech</option>
+                            <option value="news" <%= post.tag === 'news' ? 'selected' : '' %>>News</option>
+                            <option value="random" <%= post.tag === 'random' ? 'selected' : '' %>>Random</option>
+                            <option value="gaming" <%= post.tag === 'gaming' ? 'selected' : '' %>>Gaming</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="body" class="form-label fw-bold">Body</label>
+                        <textarea class="form-control" id="body" name="body" rows="8" required><%= post.body %></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="image" class="form-label fw-bold">Update Thumbnail (Optional)</label>
+                        <input class="form-control" type="file" id="image" name="image">
+                        <% if (post.image) { %>
+                            <div class="mt-2">
+                                <small class="text-muted">Current image:</small><br>
+                                <img src="<%= post.image %>" class="img-thumbnail" style="height: 100px;" alt="current">
+                            </div>
+                        <% } %>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="/posts/<%= post._id %>" class="btn btn-light border px-4">Cancel</a>
+                        <button type="submit" class="btn btn-primary px-5">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
