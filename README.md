@@ -1,4 +1,4 @@
-# 🖋️ InkIt (Poster)
+# 🖋️ InkIt 
 
 A modern, full-stack social blogging platform built with **Node.js**, **Express**, and **MongoDB**. InkIt allows users to create, share, and engage with content in a vibrant and interactive community.
 
